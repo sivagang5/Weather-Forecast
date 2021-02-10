@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <title>Weather Forecast </title>
+    <style>
+        .imgop {
+            opacity: 0.5;
+        }
+    </style>
+</head>
+
+<body style="background-color: rgba(176, 179, 228, 0.733);">
+
+    <br>
+    <div style="display: flex; justify-content: center; align-items: center; ;">
+        <span style="font-size: 30px;">Weather Forecast </span><br><br><br><br><br><br>
+    </div>
+
+    <br>
+
+    <div style="display: block; margin: 0px 400px; background-color: white; border-radius: 9px;" >
+        <div id='d1' style='padding: 10px 20px'></div>
+    </div>
+
+    <div id='d2' style="display: block; margin: 0px 400px; margin-top: 25px; background-color: white; border-radius: 9px;" >
+        <div style="display: flex; justify-content: left; margin-top: 5px; padding: 15px 20px">
+            Current Weather
+        </div>
+        <div style="padding: 3px 20px 13px 20px;  ">
+            <div style="display: flex; justify-content: center;">
+
+                <div style=" width: 19%; ">
+                    <img src="sunny.png" alt="No Image" width="82px">
+                    <div id='desc' style="padding-left: 9px;"></div>
+                </div>
+                <div style="padding: 15px 10px; width: 20%;">
+                    <div id='temp'> </div>
+                    <div id='feels'>  </div>
+                </div>
+                <div style="padding: 15px 10px 15px 0px; width: 20%;">
+                    <div>Air Quality: Poor</div>
+                    <div id='wind'></div>
+                </div>
+            </div>
+        </div>
+    </div>  
+
+    <div id='d3' style="display: block; margin: 0px 400px; margin-top: 25px; background-color: white; border-radius: 9px;" >
+        <div style="display: flex; justify-content: left; margin-top: 10px; padding: 15px 20px">
+            Current Air Quality
+        </div>
+        <div style="padding: 15px 80px; ">
+            <div style="display: flex; justify-content: center;">
+                <img src="airq.jpg" alt="No Image" width="120px" class="imgop">
+                <div style="display: flex; align-items: center; padding-right: 10px;">
+                    <div>98</div>
+                    <div>AQI</div>
+                </div>
+                <div style="padding: 0px 10px;">
+                    <div> Poor </div>
+                    <div>  Healthy individuals may experience throat irritation with prolonged exposure. 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+    <div id='d4' style="display: block; margin: 0px 400px; margin-top: 25px; background-color: white; border-radius: 9px;" >
+        <div style="display: flex; justify-content: left; margin-top: 10px; padding: 15px 20px">
+            Tonight's Weather Forecast
+        </div>
+        <div style="padding: 3px 20px 13px 20px;  ">
+            <div style="display: flex; justify-content: center;">
+                <div style=" width: 19%; ">
+                    <img src="sunny.png" alt="No Image" width="82px">
+                </div>
+                <div style="padding: 15px 10px; width: 20%;">
+                    <div> 24 &degC </div>
+                    <div> RealFeel 26 &degC </div>
+                </div>
+                <div style="padding: 15px 10px; width: 20%;">
+                    <div>Mostly Cloudy</div>
+                </div>
+            </div>
+        </div>
+    </div>  
+
+    <div id='d5' style="display: block; margin: 0px 400px; margin-top: 25px; background-color: white; border-radius: 9px;" >
+        <div style="display: flex; justify-content: left; margin-top: 10px; padding: 15px 20px">
+            Tomorrow's Weather Forecast
+        </div>
+        <div style="padding: 3px 20px 13px 20px;  ">
+            <div style="display: flex; justify-content: center;">
+                <div style=" width: 19%; ">
+                    <img src="sunny.png" alt="No Image" width="82px">
+                </div>
+                <div style="padding: 15px 10px; width: 20%;">
+                    <div> 30 &degC </div>
+                    <div> RealFeel 31 &degC </div>
+                </div>
+                <div style="padding: 15px 10px; width: 20%;">
+                    <div>Mostly Sunny</div>
+                </div>
+            </div>
+        </div>
+    </div>  
+
+    <div style="display: flex; justify-content: center;  margin: 20px 400px; background-color: white; border-radius: 9px; padding:10px">
+        <span style="padding-right: 15px;"><a href='weather.html'> Search </a></span>
+        <span style="padding: 0px 15px;"><a href='weather2.html'> Hourly Forecast</a> </span>
+        <span style="padding-left: 15px;"><a href='weather3.html'> Daily Forecast</a> </span>
+        <span style="padding: 0px 15px;"><a href='radar.html'> Weather Radar</a></span>
+
+    </div>
+    
+    <script>
+
+        city=localStorage["city"]
+        var url='http://api.openweathermap.org/data/2.5/weather?q='+city+'&appid=d1cfc4f4a5107bc635c27277b85c40a0'
+
+        fetch(url)
+        .then((resp) => resp.json())
+        .then((data) => {
+            console.log(data)
+            disp(data)
+        })
+
+        function disp(data) {
+            city1=document.getElementById('d1')
+            city2=data.name
+            country=data.sys.country
+            city1.innerHTML=`Location: ${city2}, ${country}`
+            desc1=data.weather[0].description
+            desc2=desc1.charAt(0).toUpperCase() + desc1.slice(1).toLowerCase()
+            desc=document.getElementById('desc')
+            desc.innerHTML=`${desc2}`
+            temp=data.main.temp
+            temp1=temp/10
+            temp2=Math.round(temp1*10)/10
+            temp=document.getElementById('temp')
+            temp.innerHTML=`${temp2} &degC `
+            feels1=data.main.feels_like
+            feels2=feels1/10
+            feels3=Math.round(feels2*10)/10
+            feels=document.getElementById('feels')
+            feels.innerHTML=`RealFeel ${feels3} &degC `
+            wind2=data.wind.speed
+            wind=document.getElementById('wind')
+            wind.innerHTML=`Wind: ${wind2} km/h `
+            
+        }
+
+
+    </script>
+
+</body>
+</html>

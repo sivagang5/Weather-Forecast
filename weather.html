@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <title>Weather </title>
+</head>
+
+<body style="background-color:rgba(176, 179, 228, 0.733);">
+
+    <br>
+    <div style="display: flex; justify-content: center; align-items: center; ;">
+        <span style="font-size: 30px;">Weather Forecast </span><br><br><br><br><br><br>
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center; ">
+        <span style="font-size: 20px;">Search Location. </span><br><br><br><br>
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <input id='inp1' type="text" style="width: 20%; height: 25px;" placeholder='&nbsp Enter city'>
+        <button id='b1' style="height: 30px;">Search</button><br><br>
+    </div>
+    <br><br>
+    
+    
+    <script>
+        document.getElementById('b1').onclick = d1;
+
+        function d1() {
+            city=document.getElementById('inp1').value
+            localStorage["city"] = city;
+            location.href='weather1.html'
+        }
+                 
+    </script>
+
+</body>
+</html>

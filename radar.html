@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <title>Weather Radar </title>
+</head>
+
+<body style="background-color: rgba(108, 115, 219, 0.733);">
+
+    <br><br>
+    <div style="display: flex; justify-content: center; align-items: center; ;">
+        <span style="font-size: 30px;">Weather Forecast </span><br><br><br><br><br><br>
+    </div>
+
+    <div style="display: block; margin: 0px 300px; background-color: white; border-radius: 9px;" >
+        <div id='d1' style='padding: 10px 20px'></div>
+    </div>
+
+    <div style="display: block; margin: 0px 300px; background-color: white; border-radius: 9px; margin-top: 25px" >
+        <div style='padding: 10px 20px'> Weather Radar</div>
+    </div>
+    
+    <div style="display: block; margin: 0px 300px; margin-top: 25px; background-color: white; border-radius: 9px;" >
+        <div style="padding: 23px;  ">
+            <div style="display: flex; ;">
+                
+                <div style=" width: 90%; ">
+                    <img src="radar.jpg" alt="No Image" width="688px">
+                </div>
+               
+            </div>
+        </div>
+    </div>  
+    
+    <div style="display: flex; justify-content: center;  margin: 20px 300px; background-color: white; border-radius: 9px; padding:10px">
+        <span style="padding-right: 15px;"><a href='weather.html'> Search </a></span>
+        <span style="padding: 0px 15px;"><a href='weather1.html'> Weather Forecast</a></span>
+        <span style="padding: 0px 15px;"><a href='weather2.html'> Hourly Forecast</a> </span>
+        <span style="padding-left: 15px;"><a href='weather3.html'> Daily Forecast</a>  </span>
+
+    </div>
+    
+    <script>
+        city=localStorage["city"]
+        var url='http://api.openweathermap.org/data/2.5/weather?q='+city+'&appid=d1cfc4f4a5107bc635c27277b85c40a0'
+
+        fetch(url)
+        .then((resp) => resp.json())
+        .then((data) => {
+            console.log(data)
+            disp(data)
+        })
+
+        function disp(data) {
+            city1=document.getElementById('d1')
+            city2=data.name
+            country=data.sys.country
+            city1.innerHTML=`Location: ${city2}, ${country}`
+        }
+
+    </script>
+
+</body>
+</html>
